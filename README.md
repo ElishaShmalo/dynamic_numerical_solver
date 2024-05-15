@@ -24,10 +24,10 @@ displayer.loop()
 # You can declare your own functions like so:
 
 # This is a simple preditor prey model
-def prey_prime(solver, x, v): # The "solver" is something in the backend, but it must be included as the first positional argument
+def prey_prime(solver, x, v, t): # The "solver" is something in the backend, but it must be included as the first positional argument
         return solver.parameters["a"]*x - solver.parameters["b"]*v*x
 
-def predetor_prime(solver, x, v):
+def predetor_prime(solver, x, v, t):
     return  -solver.parameters["c"]*v + solver.parameters["d"]*v*x
 
 displayer = Displayer(
@@ -44,10 +44,10 @@ displayer.loop()
 
 # Here we see the preditor prey model along with the damped harmonic ocillator
 
-def prey_prime(solver, x, v):
+def prey_prime(solver, x, v, t):
         return solver.parameters["a"]*x - solver.parameters["b"]*v*x
 
-def predetor_prime(solver, x, v):
+def predetor_prime(solver, x, v, t):
     return  -solver.parameters["c"]*v + solver.parameters["d"]*v*x
 
 displayer = Displayer(
