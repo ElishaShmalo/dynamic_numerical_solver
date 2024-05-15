@@ -1,7 +1,6 @@
 from my_code.displayers.second_order_display import Displayer, SecondOrderSolver
 
 
-
 def prey_prime(solver, x, v):
         return solver.parameters["a"]*x - solver.parameters["b"]*v*x
 
@@ -15,5 +14,3 @@ displayer = Displayer(
         ]
     )
 displayer.loop()
-
-
