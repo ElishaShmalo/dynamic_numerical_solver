@@ -1,12 +1,14 @@
 import matplotlib.pyplot as plt
 from math import sqrt
 
-def x_prime(solver, x, v):
+def x_prime(solver, x, v, t):
     return v
 
-def v_prime(solver, x, v):
+def v_prime(solver, x, v, t):
     return  -solver.parameters["k"]/solver.parameters["m"]*x - solver.parameters["b"]/solver.parameters["m"]*v
 
+def euler_menthod(solver, point, index_to_solve, t, dt, deriv_func):
+    return point[index_to_solve] + deriv_func(solver, point[0], point[1], t) * dt
 
 class SecondOrderSolver:
 
@@ -40,8 +42,8 @@ class SecondOrderSolver:
                 current_x = current_point[0]
                 current_v = current_point[1]
 
-                next_x = current_x + (self.derivatives["x"](self, current_x, current_v) * dt)
-                next_v = current_v + (self.derivatives["v"](self, current_x, current_v) * dt)
+                next_x = current_x + (self.derivatives["x"](self, current_x, current_v, t) * dt)
+                next_v = current_v + (self.derivatives["v"](self, current_x, current_v, t) * dt)
                 
                 self.points.append([next_x, next_v])
 
@@ -54,8 +56,8 @@ class SecondOrderSolver:
                 current_x = current_point[0]
                 current_v = current_point[1]
 
-                next_x = current_x + (self.derivatives["x"](self, current_x, current_v) * -dt)
-                next_v = current_v + (self.derivatives["v"](self, current_x, current_v) * -dt)
+                next_x = current_x + (self.derivatives["x"](self, current_x, current_v, t) * -dt)
+                next_v = current_v + (self.derivatives["v"](self, current_x, current_v, t) * -dt)
 
                 self.points.insert(0, [next_x, next_v])
                 

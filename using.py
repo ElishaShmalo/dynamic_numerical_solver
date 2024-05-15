@@ -1,10 +1,10 @@
 from my_code.displayers.second_order_display import Displayer, SecondOrderSolver
 
 
-def prey_prime(solver, x, v):
+def prey_prime(solver, x, v, t):
         return solver.parameters["a"]*x - solver.parameters["b"]*v*x
 
-def predetor_prime(solver, x, v):
+def predetor_prime(solver, x, v, t):
     return  -solver.parameters["c"]*v + solver.parameters["d"]*v*x
 
 displayer = Displayer(
