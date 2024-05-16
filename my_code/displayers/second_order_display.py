@@ -58,7 +58,7 @@ class Displayer:
                 s.active = i ==  self.resetting_initial_cond[1]
                 s.showing = i ==  self.resetting_initial_cond[1]
                 if param == "dt":
-                    s.min_value = 0.00001
+                    s.min_value = 0.0005
                     s.max_value = 0.1
                 if param == "time_range":
                     s.min_value = 1
