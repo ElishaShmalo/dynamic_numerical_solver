@@ -34,40 +34,40 @@ class SecondOrderSolver:
         else:
             time_range = self.parameters["time_range"]
 
-        try: 
-            t = 0
-            while t < time_range/2:
-                current_point = self.points[-1]
+        t = 0
+        while t < time_range/2:
+            current_point = self.points[-1]
 
-                current_x = current_point[0]
-                current_v = current_point[1]
+            current_x = current_point[0]
+            current_v = current_point[1]
 
+            try:
                 next_x = current_x + (self.derivatives["x"](self, current_x, current_v, t) * dt)
                 next_v = current_v + (self.derivatives["v"](self, current_x, current_v, t) * dt)
-                
+
                 self.points.append([next_x, next_v])
+            except Exception as e:
+                print(f"There was an error: {e}")
+                break
 
-                t += dt
-            
-            t = 0
-            while t > -time_range/2:
-                current_point = self.points[0]
+            t += dt
+        
+        t = 0
+        while t > -time_range/2:
+            current_point = self.points[0]
 
-                current_x = current_point[0]
-                current_v = current_point[1]
-
+            current_x = current_point[0]
+            current_v = current_point[1]
+            try:
                 next_x = current_x + (self.derivatives["x"](self, current_x, current_v, t) * -dt)
                 next_v = current_v + (self.derivatives["v"](self, current_x, current_v, t) * -dt)
 
                 self.points.insert(0, [next_x, next_v])
+            except Exception as e:
+                print(f"There was an error: {e}")
+                break
                 
-
-                t -= dt
-        except Exception as e:
-            print("Hey, there was an error:")
-            print(e)
-            self.points = [[self.p0[0], self.p0[1]]]
-
+            t -= dt
 
         return self.points
     
